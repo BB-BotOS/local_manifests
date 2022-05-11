@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="gitlab-local"
+            fetch="https://gitlab.com/"
+            revision="lineage-20" />
+
+    <remote name="github-local"
+            fetch="https://github.com/"
+            revision="lineage-20" />
+
+    <!-- hardware -->
+    <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-local" />
+
+    <!-- vendor -->
+    <project path="vendor/xiaomi" name="itsvixano-dev/android_vendor_xiaomi" remote="gitlab-local" />
+    <project path="vendor/extra" name="itsvixano-dev/android_vendor_extra" remote="gitlab-local" />
+    <!-- <project path="vendor/firmware" name="ArianK16a/proprietary_vendor_firmware" remote="gitlab-local" /> -->
+    <!-- <project path="vendor/qcom/opensource/healthd-ext" name="LineageOS/android_vendor_qcom_opensource_healthd-ext" remote="github-local" /> -->
+
+    <!-- device (sm8350) -->
+    <!-- <project path="device/xiaomi/lisa" name="xiaomi-lisa-devs/android_device_xiaomi_lisa" remote="github-local" /> -->
+    <!-- <project path="device/xiaomi/sm8350-common" name="xiaomi-lisa-devs/android_device_xiaomi_sm8350-common" remote="github-local" /> -->
+
+    <!-- kernel (sm8350) -->
+    <!-- <project path="kernel/xiaomi/sm8350" name="renoir-development/android_kernel_xiaomi_sm8350" remote="github-local" /> -->
+
+    <!-- device (msm8953) -->
+    <project path="device/xiaomi/ysl" name="ItsVixano/device_xiaomi_ysl" remote="github-local" />
+    <project path="device/xiaomi/sakura" name="ItsVixano/android_device_xiaomi_sakura" remote="github-local" />
+    <project path="device/xiaomi/daisy" name="ItsVixano/android_device_xiaomi_daisy" remote="github-local" />
+    <project path="device/xiaomi/sakura-common" name="ItsVixano/android_device_xiaomi_sakura-common" remote="github-local" />
+    <project path="device/xiaomi/msm8953-common" name="ItsVixano/android_device_xiaomi_msm8953-common" remote="github-local" />
+
+    <!-- kernel (msm8953) -->
+    <project path="kernel/xiaomi/msm8953" name="ItsVixano/android_kernel_xiaomi_msm8953" remote="github-local" />
+
+</manifest>

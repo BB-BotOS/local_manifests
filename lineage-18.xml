@@ -11,6 +11,7 @@
     <project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="lineage-local" revision="lineage-18.1"/>
 
     <!-- vendor -->
+    <project path="vendor/qcom/opensource/healthd-ext" name="android_vendor_qcom_opensource_healthd-ext" remote="lineage-local" revision="lineage-18.1"/>
     <project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="gitlab-local" revision="lineage-18.1"/>
 
     <!-- device -->

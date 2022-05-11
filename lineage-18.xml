@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <remote name="lineage-local"
+            fetch="https://github.com/LineagOS" />
+
+    <remote name="gitlab-local"
+            fetch="https://gitlab.com/ItsVixano-dev" />
+
+    <!-- hardware -->
+    <project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="lineage-local" revision="lineage-18.1"/>
+
+    <!-- vendor -->
+    <project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="gtlab-local" revision="lineage-18.1"/>
+
+    <!-- device -->
+    <project path="device/xiaomi/lisa" name="android_device_xiaomi_lisa" remote="gtlab-local" revision="staging/lineage-18.1"/>
+    <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="gtlab-local" revision="staging/lineage-18.1"/>
+
+    <!-- kernel -->
+    <project path="kernel/xiaomi/sm8350" name="android_kernel_xiaomi_sm8350" remote="gtlab-local" revision="staging/lineage-18.1"/>
+
+</manifest>

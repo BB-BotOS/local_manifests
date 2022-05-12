@@ -1,12 +1,15 @@
 From 7fd3be72e041a821aa834f61e4dd2797c3fd1fed Mon Sep 17 00:00:00 2001
 From: Giovanni Ricca <giovanniricca@protonmail.com>
 Date: Wed, 11 May 2022 23:50:07 +0200
-Subject: [PATCH] updater: Use gh releases to host otas
+Subject: [PATCH] updater: Use gh releases to host 18 otas
+
+* {incr} = ro.build.version.incremental
+* on official releases, it equals to () // example on lavender
 
 Change-Id: I42bbd7fccf66101d3513e7791bbebff8014a3eac
 ---
  res/values/strings.xml | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/res/values/strings.xml b/res/values/strings.xml
 index bfb2627..3fbf1af 100644
@@ -17,10 +20,11 @@ index bfb2627..3fbf1af 100644
          Optional placeholders replaced at runtime:
            {device} - Device name
 -          {type} - Build type
-           {incr} - Incremental version
+-          {incr} - Incremental version
++          {incr} - Incremental version ( ro.build.version.incremental )
      -->
 -    <string name="updater_server_url" translatable="false">https://download.lineageos.org/api/v1/{device}/{type}/{incr}</string>
-+    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/ItsVixano-releases/LineageOS_{device}/blob/main/lineage-18-{incr}.json</string>
++    <string name="updater_server_url" translatable="false">https://raw.githubusercontent.com/ItsVixano-releases/LineageOS_{device}/blob/main/lineage-18/{incr}.json</string>
  
      <string name="verification_failed_notification">Verification failed</string>
      <string name="verifying_download_notification">Verifying update</string>

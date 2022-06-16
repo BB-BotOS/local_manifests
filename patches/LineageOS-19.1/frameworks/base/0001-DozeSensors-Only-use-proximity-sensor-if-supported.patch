@@ -1,0 +1,219 @@
+From 4182ba94c47e718d99f9d23f2a4b1001ba285fd4 Mon Sep 17 00:00:00 2001
+From: Demon000 <demonsingur@gmail.com>
+Date: Sun, 13 Dec 2020 16:13:35 -0800
+Subject: [PATCH] DozeSensors: Only use proximity sensor if supported
+
+On msm-4.14 devices, when the proximity sensor is in use,
+the smp2p-sleepstate IRQ is fired multiple times a second,
+with each one holding a 200ms wakelock.
+This is probably a bug in the DSP firmware.
+To fix this, avoid using the proximity sensor in doze mode,
+because sleep is preferred to turning off the screen.
+
+[dev-harsh1998]: ForwardPort to R.
+[YAAP]: ForwardPort to S.
+
+Change-Id: Ia55388eff52a2136c87106d81ea295d2fe9140b2
+Signed-off-by: Harshit Jain <god@hyper-labs.tech>
+Signed-off-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
+Signed-off-by: Matt Filetto <matt.filetto@gmail.com>
+---
+ ...8b40a9b4c54fa327d467bb1c0016a1154e6a.patch | 104 ++++++++++++++++++
+ .../SystemUI/res/values/lineage_config.xml    |   3 +
+ .../android/systemui/doze/DozeSensors.java    |  23 ++--
+ 3 files changed, 122 insertions(+), 8 deletions(-)
+ create mode 100644 27f58b40a9b4c54fa327d467bb1c0016a1154e6a.patch
+
+diff --git a/27f58b40a9b4c54fa327d467bb1c0016a1154e6a.patch b/27f58b40a9b4c54fa327d467bb1c0016a1154e6a.patch
+new file mode 100644
+index 00000000..31a04836
+--- /dev/null
++++ b/27f58b40a9b4c54fa327d467bb1c0016a1154e6a.patch
+@@ -0,0 +1,104 @@
++From 27f58b40a9b4c54fa327d467bb1c0016a1154e6a Mon Sep 17 00:00:00 2001
++From: Demon000 <demonsingur@gmail.com>
++Date: Sun, 13 Dec 2020 16:13:35 -0800
++Subject: [PATCH] DozeSensors: Only use proximity sensor if supported
++
++On msm-4.14 devices, when the proximity sensor is in use,
++the smp2p-sleepstate IRQ is fired multiple times a second,
++with each one holding a 200ms wakelock.
++This is probably a bug in the DSP firmware.
++To fix this, avoid using the proximity sensor in doze mode,
++because sleep is preferred to turning off the screen.
++
++[dev-harsh1998]: ForwardPort to R.
++[YAAP]: ForwardPort to S.
++
++Change-Id: Ia55388eff52a2136c87106d81ea295d2fe9140b2
++Signed-off-by: Harshit Jain <god@hyper-labs.tech>
++Signed-off-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
++Signed-off-by: Matt Filetto <matt.filetto@gmail.com>
++---
++ packages/SystemUI/res/values/yaap_config.xml  |  3 +++
++ .../android/systemui/doze/DozeSensors.java    | 23 ++++++++++++-------
++ 2 files changed, 18 insertions(+), 8 deletions(-)
++
++diff --git a/packages/SystemUI/res/values/yaap_config.xml b/packages/SystemUI/res/values/yaap_config.xml
++index 2bcbc52bebd6..4cfaaa070658 100644
++--- a/packages/SystemUI/res/values/yaap_config.xml
+++++ b/packages/SystemUI/res/values/yaap_config.xml
++@@ -28,4 +28,7 @@
++     <bool name="config_statusBarBurnInProtection">true</bool>
++     <integer name="config_shift_interval">60</integer>
++ 
+++    <!-- Whether usage of the proximity sensor during doze is supported -->
+++    <bool name="doze_proximity_sensor_supported">true</bool>
+++
++ </resources>
++diff --git a/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java b/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
++index 239109af7a3d..8f0061145621 100644
++--- a/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
+++++ b/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
++@@ -55,6 +55,7 @@
++ import com.android.systemui.util.sensors.ProximitySensor;
++ import com.android.systemui.util.settings.SecureSettings;
++ import com.android.systemui.util.wakelock.WakeLock;
+++import com.android.systemui.R;
++ 
++ import java.io.PrintWriter;
++ import java.util.Arrays;
++@@ -123,6 +124,8 @@ public class DozeSensors {
++     @DevicePostureController.DevicePostureInt
++     private int mDevicePosture;
++ 
+++    private boolean mDisableProx;
+++
++     // whether to only register sensors that use prox when the display state is dozing or off
++     private boolean mSelectivelyRegisterProxSensors;
++ 
++@@ -169,6 +172,7 @@ public int getId() {
++         mProximitySensor.setTag(TAG);
++         mSelectivelyRegisterProxSensors = dozeParameters.getSelectivelyRegisterSensorsUsingProx();
++         mListeningProxSensors = !mSelectivelyRegisterProxSensors;
+++        mDisableProx = context.getResources().getBoolean(R.bool.doze_proximity_sensor_supported);
++         mScreenOffUdfpsEnabled =
++                 config.screenOffUdfpsEnabled(KeyguardUpdateMonitor.getCurrentUser());
++         mDevicePostureController = devicePostureController;
++@@ -260,12 +264,14 @@ public int getId() {
++                         false /* requiresProx */),
++         };
++         setProxListening(false);  // Don't immediately start listening when we register.
++-        mProximitySensor.register(
++-                proximityEvent -> {
++-                    if (proximityEvent != null) {
++-                        mProxCallback.accept(!proximityEvent.getBelow());
++-                    }
++-                });
+++        if (!mDisableProx) {
+++            mProximitySensor.register(
+++                    proximityEvent -> {
+++                        if (proximityEvent != null) {
+++                            mProxCallback.accept(!proximityEvent.getBelow());
+++                        }
+++                    });
+++        }
++ 
++         mDevicePostureController.addCallback(mDevicePostureCallback);
++     }
++@@ -472,14 +478,15 @@ public void dump(PrintWriter pw) {
++         for (TriggerSensor s : mTriggerSensors) {
++             idpw.println("Sensor: " + s.toString());
++         }
++-        idpw.println("ProxSensor: " + mProximitySensor.toString());
+++        if (!mDisableProx) // Useless
+++            idpw.println("ProxSensor: " + mProximitySensor.toString());
++     }
++ 
++     /**
++      * @return true if prox is currently near, false if far or null if unknown.
++      */
++     public Boolean isProximityCurrentlyNear() {
++-        return mProximitySensor.isNear();
+++        return mDisableProx ? null : mProximitySensor.isNear();
++     }
++ 
++     @VisibleForTesting
+diff --git a/packages/SystemUI/res/values/lineage_config.xml b/packages/SystemUI/res/values/lineage_config.xml
+index ff40c892..dd6418bd 100644
+--- a/packages/SystemUI/res/values/lineage_config.xml
++++ b/packages/SystemUI/res/values/lineage_config.xml
+@@ -36,4 +36,7 @@
+ 
+     <!-- Udfps HBM provider class name -->
+     <string name="config_udfpsHbmProviderComponent">com.android.systemui.biometrics.DummyUdfpsHbmProvider</string>
++
++    <!-- Whether usage of the proximity sensor during doze is supported -->
++    <bool name="doze_proximity_sensor_supported">true</bool>
+ </resources>
+diff --git a/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java b/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
+index 239109af..0a4ab24f 100644
+--- a/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
++++ b/packages/SystemUI/src/com/android/systemui/doze/DozeSensors.java
+@@ -55,6 +55,7 @@ import com.android.systemui.util.sensors.AsyncSensorManager;
+ import com.android.systemui.util.sensors.ProximitySensor;
+ import com.android.systemui.util.settings.SecureSettings;
+ import com.android.systemui.util.wakelock.WakeLock;
++import com.android.systemui.R;
+ 
+ import java.io.PrintWriter;
+ import java.util.Arrays;
+@@ -123,6 +124,8 @@ public class DozeSensors {
+     @DevicePostureController.DevicePostureInt
+     private int mDevicePosture;
+ 
++    private boolean mDisableProx;
++
+     // whether to only register sensors that use prox when the display state is dozing or off
+     private boolean mSelectivelyRegisterProxSensors;
+ 
+@@ -168,6 +171,7 @@ public class DozeSensors {
+         mProximitySensor = proximitySensor;
+         mProximitySensor.setTag(TAG);
+         mSelectivelyRegisterProxSensors = dozeParameters.getSelectivelyRegisterSensorsUsingProx();
++        mDisableProx = context.getResources().getBoolean(R.bool.doze_proximity_sensor_supported);
+         mListeningProxSensors = !mSelectivelyRegisterProxSensors;
+         mScreenOffUdfpsEnabled =
+                 config.screenOffUdfpsEnabled(KeyguardUpdateMonitor.getCurrentUser());
+@@ -260,12 +264,14 @@ public class DozeSensors {
+                         false /* requiresProx */),
+         };
+         setProxListening(false);  // Don't immediately start listening when we register.
+-        mProximitySensor.register(
+-                proximityEvent -> {
+-                    if (proximityEvent != null) {
+-                        mProxCallback.accept(!proximityEvent.getBelow());
+-                    }
+-                });
++        if (!mDisableProx) {
++            mProximitySensor.register(
++                    proximityEvent -> {
++                        if (proximityEvent != null) {
++                            mProxCallback.accept(!proximityEvent.getBelow());
++                        }
++                    });
++        }
+ 
+         mDevicePostureController.addCallback(mDevicePostureCallback);
+     }
+@@ -472,14 +478,15 @@ public class DozeSensors {
+         for (TriggerSensor s : mTriggerSensors) {
+             idpw.println("Sensor: " + s.toString());
+         }
+-        idpw.println("ProxSensor: " + mProximitySensor.toString());
++        if (!mDisableProx) // Useless
++            idpw.println("ProxSensor: " + mProximitySensor.toString());
+     }
+ 
+     /**
+      * @return true if prox is currently near, false if far or null if unknown.
+      */
+     public Boolean isProximityCurrentlyNear() {
+-        return mProximitySensor.isNear();
++        return mDisableProx ? null : mProximitySensor.isNear();
+     }
+ 
+     @VisibleForTesting
+-- 
+2.35.1
+

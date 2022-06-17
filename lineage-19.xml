@@ -9,39 +9,28 @@
             fetch="https://gitlab.com/ItsVixano-dev"
             revision="lineage-19.1" />
 
-    <!-- temp -->
-    <remote name="temp"
-            fetch="https://github.com/xiaomi-lisa-devs"
-            revision="staging1/lineage-19.1" />
-    <!-- -->
-
     <!-- hardware -->
     <project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="lineage-local" />
 
     <!-- vendor -->
     <project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="gitlab-local" />
+    <project path="vendor/qcom/opensource/healthd-ext" name="android_vendor_qcom_opensource_healthd-ext" remote="gitlab-local" />
 
-    <!-- device (sm8350)-->
-    <!--
+    <!-- device (sm8350) -->
     <project path="device/xiaomi/lisa" name="android_device_xiaomi_lisa" remote="gitlab-local" revision="staging1/lineage-19.1" />
     <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="gitlab-local" revision="staging1/lineage-19.1" />
-    -->
-    <!-- temp -->
-    <project path="device/xiaomi/lisa" name="device_xiaomi_lisa" remote="temp" />
-    <project path="device/xiaomi/sm8350-common" name="device_xiaomi_sm8350-common" remote="temp" />
-    <!-- -->
 
-    <!-- kernel (sm8350)-->
+    <!-- kernel (sm8350) -->
     <project path="kernel/xiaomi/sm8350" name="android_kernel_xiaomi_sm8350" remote="gitlab-local" revision="staging1/lineage-19.1" />
 
-    <!-- device (msm8953)-->
+    <!-- device (msm8953) -->
     <project path="device/xiaomi/ysl" name="android_device_xiaomi_ysl" remote="gitlab-local" />
     <project path="device/xiaomi/sakura" name="android_device_xiaomi_sakura" remote="gitlab-local" />
     <project path="device/xiaomi/daisy" name="android_device_xiaomi_daisy" remote="gitlab-local" />
     <project path="device/xiaomi/sakura-common" name="android_device_xiaomi_sakura-common" remote="gitlab-local" />
     <project path="device/xiaomi/msm8953-common" name="android_device_xiaomi_msm8953-common" remote="gitlab-local" revision="staging3/lineage-19.1" />
 
-    <!-- kernel (sm8350)-->
+    <!-- kernel (msm8953) -->
     <project path="kernel/xiaomi/msm8953" name="android_kernel_xiaomi_msm8953" remote="gitlab-local" />
 
 </manifest>

@@ -1,7 +1,9 @@
 From 4c7902e1c0c421ec1ffa68fba3b7b5e399ffa98b Mon Sep 17 00:00:00 2001
 From: Demon000 <demonsingur@gmail.com>
 Date: Sun, 13 Dec 2020 16:13:35 -0800
-Subject: [PATCH] DozeSensors: Only use proximity sensor if supported
+Subject: [PATCH] [SQUASH] DozeSensors: Only use proximity sensor if supported
+
+DozeSensors: Only use proximity sensor if supported
 
 On msm-4.14 devices, when the proximity sensor is in use,
 the smp2p-sleepstate IRQ is fired multiple times a second,
@@ -17,6 +19,10 @@ Change-Id: Ia55388eff52a2136c87106d81ea295d2fe9140b2
 Signed-off-by: Harshit Jain <god@hyper-labs.tech>
 Signed-off-by: Adithya R <gh0strider.2k18.reborn@gmail.com>
 Signed-off-by: Matt Filetto <matt.filetto@gmail.com>
+
+DozeSensors: flip logic for disabling prox
+
+Signed-off-by: Omkar Chandorkar <gotenksIN@aosip.dev>
 ---
  .../SystemUI/res/values/lineage_config.xml    |  3 +++
  .../android/systemui/doze/DozeSensors.java    | 23 ++++++++++++-------
@@ -50,7 +56,7 @@ index 239109af..0a4ab24f 100644
      @DevicePostureController.DevicePostureInt
      private int mDevicePosture;
  
-+    private boolean mDisableProx;
++    private boolean mEnableProx;
 +
      // whether to only register sensors that use prox when the display state is dozing or off
      private boolean mSelectivelyRegisterProxSensors;
@@ -59,7 +65,7 @@ index 239109af..0a4ab24f 100644
          mProximitySensor = proximitySensor;
          mProximitySensor.setTag(TAG);
          mSelectivelyRegisterProxSensors = dozeParameters.getSelectivelyRegisterSensorsUsingProx();
-+        mDisableProx = context.getResources().getBoolean(R.bool.doze_proximity_sensor_supported);
++        mEnableProx = context.getResources().getBoolean(R.bool.doze_proximity_sensor_supported);
          mListeningProxSensors = !mSelectivelyRegisterProxSensors;
          mScreenOffUdfpsEnabled =
                  config.screenOffUdfpsEnabled(KeyguardUpdateMonitor.getCurrentUser());
@@ -73,7 +79,7 @@ index 239109af..0a4ab24f 100644
 -                        mProxCallback.accept(!proximityEvent.getBelow());
 -                    }
 -                });
-+        if (!mDisableProx) {
++        if (mEnableProx) {
 +            mProximitySensor.register(
 +                    proximityEvent -> {
 +                        if (proximityEvent != null) {
@@ -89,7 +95,7 @@ index 239109af..0a4ab24f 100644
              idpw.println("Sensor: " + s.toString());
          }
 -        idpw.println("ProxSensor: " + mProximitySensor.toString());
-+        if (!mDisableProx) // Useless
++        if (mEnableProx) // Useless
 +            idpw.println("ProxSensor: " + mProximitySensor.toString());
      }
  
@@ -98,7 +104,7 @@ index 239109af..0a4ab24f 100644
       */
      public Boolean isProximityCurrentlyNear() {
 -        return mProximitySensor.isNear();
-+        return mDisableProx ? null : mProximitySensor.isNear();
++        return mEnableProx ? mProximitySensor.isNear() : null;
      }
  
      @VisibleForTesting

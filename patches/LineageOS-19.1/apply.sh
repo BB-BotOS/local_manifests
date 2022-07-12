@@ -14,4 +14,3 @@ cd ../../.repo/local_manifests/patches/LineageOS-19.1
 cp packages/modules/Permission/0001-Utils-add-FAKE_PACKAGE_SIGNATURE-to-platform-permiss.patch ../../../../packages/modules/Permission
 cd ../../../../packages/modules/Permission
 git am 0001-Utils-add-FAKE_PACKAGE_SIGNATURE-to-platform-permiss.patch
-cd ../../.repo/local_manifests/patches/LineageOS-19.1

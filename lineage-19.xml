@@ -14,7 +14,7 @@
 
     <!-- vendor -->
     <project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="gitlab-local" />
-    <project path="vendor/extra" name="android_vendor_xiaomi" remote="gitlab-local" />
+    <project path="vendor/extra" name="android_vendor_extra" remote="gitlab-local" />
     <project path="vendor/qcom/opensource/healthd-ext" name="android_vendor_qcom_opensource_healthd-ext" remote="gitlab-local" />
 
     <!-- device (sm8350) -->

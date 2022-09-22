@@ -9,8 +9,8 @@
             fetch="https://gitlab.com/ItsVixano-dev"
             revision="lineage-19.1" />
 
-    <remote name="github-local"
-            fetch="https://github.com/xiaomi-lisa-devs"
+    <remote name="renoir"
+            fetch="https://github.com/renoir-development"
             revision="lineage-19.1" />
 
     <!-- hardware -->
@@ -23,11 +23,10 @@
 
     <!-- device (sm8350) -->
     <project path="device/xiaomi/lisa" name="android_device_xiaomi_lisa" remote="gitlab-local" revision="staging1/lineage-19.1" />
-    <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="gitlab-local" revision="staging2/lineage-19.1" />
+    <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="renoir" />
 
     <!-- kernel (sm8350) -->
-    <!-- <project path="kernel/xiaomi/sm8350" name="android_kernel_xiaomi_sm8350" remote="gitlab-local" revision="staging1/lineage-19.1" /> -->
-    <project path="kernel/xiaomi/sm8350" name="android_kernel_qcom_sm8350" remote="github-local" revision="staging/lineage-19.1" />
+    <project path="kernel/xiaomi/sm8350" name="android_kernel_xiaomi_sm8350" remote="renoir" revision="staging/lineage-19.1" />
 
     <!-- device (msm8953) -->
     <project path="device/xiaomi/ysl" name="android_device_xiaomi_ysl" remote="gitlab-local" />

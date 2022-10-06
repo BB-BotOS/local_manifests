@@ -9,8 +9,8 @@
             fetch="https://gitlab.com/ItsVixano-dev"
             revision="lineage-19.1" />
 
-    <remote name="renoir"
-            fetch="https://github.com/renoir-development"
+    <remote name="ximi-github"
+            fetch="https://github.com/xiaomi-lisa-devs"
             revision="lineage-19.1" />
 
     <!-- hardware -->
@@ -19,15 +19,15 @@
     <!-- vendor -->
     <project path="vendor/xiaomi" name="proprietary_vendor_xiaomi" remote="gitlab-local" />
     <project path="vendor/extra" name="android_vendor_extra" remote="gitlab-local" />
-    <project path="vendor/firmware" name="android_vendor_firmware" remote="gitlab-local" />
+    <!-- <project path="vendor/firmware" name="android_vendor_firmware" remote="gitlab-local" /> -->
     <project path="vendor/qcom/opensource/healthd-ext" name="android_vendor_qcom_opensource_healthd-ext" remote="gitlab-local" />
 
     <!-- device (sm8350) -->
     <project path="device/xiaomi/lisa" name="android_device_xiaomi_lisa" remote="gitlab-local" revision="staging3/lineage-19.1" />
-    <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="renoir" />
+    <project path="device/xiaomi/sm8350-common" name="android_device_xiaomi_sm8350-common" remote="gitlab-local" revision="staging3/lineage-19.1" />
 
     <!-- kernel (sm8350) -->
-    <project path="kernel/xiaomi/sm8350" name="android_kernel_xiaomi_sm8350" remote="renoir" revision="staging/lineage-19.1" />
+    <project path="kernel/xiaomi/sm8350" name="android_kernel_qcom_sm8350" remote="ximi-github" revision="camera/lineage-19.1" />
 
     <!-- device (msm8953) -->
     <project path="device/xiaomi/ysl" name="android_device_xiaomi_ysl" remote="gitlab-local" />

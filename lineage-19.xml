@@ -14,7 +14,7 @@
 
     <!-- vendor -->
     <project path="vendor/xiaomi" name="itsvixano-dev/android_vendor_xiaomi" remote="gitlab-local" />
-    <project path="vendor/extra" name="itsvixano-dev/android_vendor_extra" remote="gitlab-local" />
+    <project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github-local" />
     <project path="vendor/firmware" name="ArianK16a/proprietary_vendor_firmware" remote="gitlab-local" />
     <project path="vendor/qcom/opensource/healthd-ext" name="LineageOS/android_vendor_qcom_opensource_healthd-ext" remote="github-local" />
 

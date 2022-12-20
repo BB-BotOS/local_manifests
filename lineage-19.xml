@@ -23,11 +23,12 @@
     <project path="vendor/extra/external/Camera" name="GrapheneOS/platform_external_Camera" remote="github-local" revision="13" />
 
     <!-- device (sm8350) -->
-    <project path="device/xiaomi/lisa" name="LineageOS/android_device_xiaomi_lisa" remote="github-local" />
-    <project path="device/xiaomi/sm8350-common" name="LineageOS/android_device_xiaomi_sm8350-common" remote="github-local" />
+    <project path="device/xiaomi/lisa" name="xiaomi-lisa-devs/android_device_xiaomi_lisa" remote="github-local" revision="fork/lineage-19.1" />
+    <project path="device/xiaomi/sm8350-common" name="xiaomi-lisa-devs/android_device_xiaomi_sm8350-common" remote="github-local" remote="fork/lineage-19.1" />
 
     <!-- kernel (sm8350) -->
-    <project path="kernel/xiaomi/sm8350" name="LineageOS/android_kernel_xiaomi_sm8350" remote="github-local" />
+    <!-- <project path="kernel/xiaomi/sm8350" name="LineageOS/android_kernel_xiaomi_sm8350" remote="github-local" /> -->
+    <project path="kernel/xiaomi/sm8350" name="xiaomi-lisa-devs/android_kernel_qcom_sm8350" remote="github-local" remote="fork/lineage-19.1" />
 
     <!-- device (msm8953) -->
     <project path="device/xiaomi/ysl" name="ItsVixano/device_xiaomi_ysl" remote="github-local" />

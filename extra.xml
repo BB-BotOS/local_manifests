@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+    <!-- vendor (extra) -->
+    <project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github-local" revision="master" />
+    <project path="vendor/extra/external/ih8sn" name="ItsVixano/ih8sn" remote="github-local" revision="master" />
+    <project path="vendor/extra/external/Camera" name="GrapheneOS/platform_external_Camera" remote="github-local" revision="13" />
+
+</manifest>

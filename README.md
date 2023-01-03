@@ -1,10 +1,22 @@
 # local_manifests
 
-## Local manifest for my projects
+## Personal local manifest for my LineageOS builds
+
+> :warning: I won't give support to **buildbot** LineageOS. **Be very careful!**
 
 ```bash
-# Run these commands on source roodir
-LOS_VERSION=$(grep "PRODUCT_VERSION_MAJOR" "$ANDROID_BUILD_TOP"/vendor/lineage/config/version.mk | sed 's/PRODUCT_VERSION_MAJOR = //g' | head -1)
-curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-${LOS_VERSION}.xml -o .repo/local_manifests/lineage.xml –create-dirs
-curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/extra.xml -o .repo/local_manifests/extra.xml –create-dirs
+## Sync
+# Init LineageOS repos
+repo init -u https://github.com/LineageOS/android.git --depth=1 -b lineage-20.0 # lineage-20.0, lineage-19.1
+# Add local_manifests
+LOS_VERSION=20 # 20, 19
+mkdir -p .repo/local_manifests
+curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-${LOS_VERSION}.xml -o .repo/local_manifests/lineage.xml
+curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/extra.xml -o .repo/local_manifests/extra.xml
+# Sync
+repo sync -c --force-sync --no-tags --no-clone-bundle -j$(nproc --all) --optimized-fetch --prune
+
+## Build
+. vendor/extra/build/envsetup.sh -p
+mka_build lisa # lisa, daisy, ysl
 ```

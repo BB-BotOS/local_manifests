@@ -3,13 +3,8 @@
 ## Local manifest for my projects
 
 ```bash
-# For Lineage-19.1
-mkdir -p .repo/local_manifests
-curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-19.xml -o .repo/local_manifests/lineage-19.xml
-```
-
-```bash
-# For Lineage-20
-mkdir -p .repo/local_manifests
-curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-20.xml -o .repo/local_manifests/lineage-20.xml
+# Run these commands on source roodir
+LOS_VERSION=$(grep "PRODUCT_VERSION_MAJOR" "$ANDROID_BUILD_TOP"/vendor/lineage/config/version.mk | sed 's/PRODUCT_VERSION_MAJOR = //g' | head -1)
+curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-${LOS_VERSION}.xml -o .repo/local_manifests/lineage.xml –create-dirs
+curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/extra.xml -o .repo/local_manifests/extra.xml –create-dirs
 ```

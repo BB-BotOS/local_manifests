@@ -2,8 +2,13 @@
 <manifest>
 
     <!-- vendor (extra) -->
-    <project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github-local" revision="master" />
+    <project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github-local" revision="master" clone-depth="1000" />
+
     <project path="vendor/extra/external/ih8sn" name="ItsVixano/ih8sn" remote="github-local" revision="master" />
     <project path="vendor/extra/external/Camera" name="GrapheneOS/platform_external_Camera" remote="github-local" revision="13" />
+
+    <project path="vendor/extra/tools/releases/LineageOS_lisa" name="ItsVixano-releases/LineageOS_lisa" remote="github-local" revision="main" />
+    <project path="vendor/extra/tools/releases/LineageOS_daisy" name="ItsVixano-releases/LineageOS_daisy" remote="github-local" revision="main" />
+    <project path="vendor/extra/tools/releases/LineageOS_ysl" name="ItsVixano-releases/LineageOS_ysl" remote="github-local" revision="main" />
 
 </manifest>

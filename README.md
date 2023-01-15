@@ -12,7 +12,7 @@ repo init -u https://github.com/LineageOS/android.git --depth=1 -b lineage-20.0 
 LOS_VERSION=20 # 20, 19
 mkdir -p .repo/local_manifests
 curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/lineage-${LOS_VERSION}.xml -o .repo/local_manifests/lineage.xml
-curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/extra.xml -o .repo/local_manifests/extra.xml
+curl https://gitlab.com/itsvixano-dev/local_manifests/-/raw/main/extra.xml -o .repo/local_manifests/extra.xml # For personal usage
 # Sync
 repo sync -c --force-sync --no-tags --no-clone-bundle -j$(nproc --all) --optimized-fetch --prune
 

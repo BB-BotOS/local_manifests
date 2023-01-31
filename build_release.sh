@@ -3,9 +3,9 @@
 # Build script for my build "for personal usage only"
 
 devices=(
+    "lisa"
     "daisy"
     "ysl"
-    # "lisa"
 )
 
 ## Sync

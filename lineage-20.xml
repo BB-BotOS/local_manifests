@@ -19,6 +19,7 @@
 
     <!-- vendor (msm8953) -->
     <project path="vendor/xiaomi/daisy" name="itsvixano-dev/proprietary_vendor_xiaomi_daisy" remote="gitlab-local" />
+    <project path="vendor/xiaomi/ysl" name="itsvixano-dev/proprietary_vendor_xiaomi_ysl" remote="gitlab-local" />
     <project path="vendor/xiaomi/msm8953-common" name="itsvixano-dev/proprietary_vendor_xiaomi_msm8953-common" remote="gitlab-local" />
 
     <!-- device (sm8350) -->
@@ -30,6 +31,7 @@
 
     <!-- device (msm8953) -->
     <project path="device/xiaomi/daisy" name="xiaomi-msm8953-devs/android_device_xiaomi_daisy" remote="github-local" clone-depth="1000" />
+    <project path="device/xiaomi/ysl" name="xiaomi-msm8953-devs/android_device_xiaomi_daisy" remote="github-local" clone-depth="1000" />
     <project path="device/xiaomi/msm8953-common" name="ItsVixano/android_device_xiaomi_msm8953-common" revision="tmp/lineage-20" remote="github-local" clone-depth="1000" />
 
     <!-- kernel (msm8953) -->

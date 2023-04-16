@@ -10,11 +10,13 @@
             revision="lineage-20" />
 
     <!-- hardware -->
+    <remove-project path="hardware/qcom-caf/sm8350/display" name="LineageOS/android_hardware_qcom_display" groups="qcom" />
+    <project path="hardware/qcom-caf/sm8350/display" name="xiaomi-lisa-devs/android_hardware_qcom_display" groups="qcom" revision="lineage-20.0-caf-sm8350" remote="github-local" />
     <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-local" />
 
     <!-- vendor (sm8350) -->
     <project path="vendor/xiaomi/lisa" name="itsvixano-dev/proprietary_vendor_xiaomi_lisa" remote="gitlab-local" />
-    <project path="vendor/xiaomi/sm8350-common" name="itsvixano-dev/proprietary_vendor_xiaomi_sm8350-common" remote="gitlab-local" />
+    <project path="vendor/xiaomi/sm8350-common" name="ArianK16a/proprietary_vendor_xiaomi_sm8350-common" remote="github-local" />
     <project path="vendor/firmware" name="itsvixano-dev/android_vendor_firmware" remote="gitlab-local" />
 
     <!-- vendor (msm8953) -->

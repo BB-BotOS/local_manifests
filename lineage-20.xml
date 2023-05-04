@@ -10,9 +10,6 @@
             revision="lineage-20" />
 
     <!-- hardware -->
-    <remove-project name="LineageOS/android_hardware_qcom_display" groups="qcom" />
-    <project path="hardware/qcom-caf/sm8350/display" name="xiaomi-lisa-devs/android_hardware_qcom_display" groups="qcom" revision="lineage-20.0-caf-sm8350" remote="github-local" />
-    <project path="hardware/qcom-caf/msm8996/display" name="LineageOS/android_hardware_qcom_display" groups="qcom" revision="lineage-20.0-caf-msm8996" remote="github-local" />
     <project path="hardware/xiaomi" name="LineageOS/android_hardware_xiaomi" remote="github-local" />
 
     <!-- vendor (sm8350) -->

@@ -31,7 +31,7 @@ repo forall external/chromium-webview/prebuilt/* -c "git lfs pull"
 . vendor/extra/build/envsetup.sh -p
 # Build
 for device in ${devices[@]}; do
-    echo "Build for ${device}"
+    LOGI "Build for ${device}"
     sleep 3
-    mka_build ${device} -r
+    mka_build --device ${device} -r
 done

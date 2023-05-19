@@ -25,14 +25,14 @@
     
 
     <!-- vendor (extra) -->
-    <project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github" revision="master" />
+    <!-- project path="vendor/extra" name="ItsVixano/android_vendor_extra" remote="github" revision="master" /> -->
 	
     <!-- vendor (extra/external) -->
-    <project path="vendor/extra/external/ih8sn" name="ItsVixano/ih8sn" remote="github" revision="master" />
-    <project path="vendor/extra/external/Camera" name="GrapheneOS/platform_external_Camera" remote="github" revision="13" />
+    <!-- project path="vendor/extra/external/ih8sn" name="ItsVixano/ih8sn" remote="github" revision="master" />
+    <project path="vendor/extra/external/Camera" name="GrapheneOS/platform_external_Camera" remote="github" revision="13" /> -->
 	
     <!-- vendor (extra/tools/releases) -->
-    <project path="vendor/extra/tools/releases/LineageOS_ysl" name="BB-BotOS/EOS_ysl" remote="github" revision="main" />
+    <!-- project path="vendor/extra/tools/releases/LineageOS_ysl" name="BB-BotOS/EOS_ysl" remote="github" revision="main" /> -->
 
 
  

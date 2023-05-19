@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+   
+    <remote name="sfx-Android" 	   
+           fetch="https://github.com/sfX-Android/" />
+            
+    <remote name="BB-BotOS" 
+	         fetch="https://github.com/BB-BotOS" />
+           
+    
+    <!-- Project starts -->
+    
+    <!-- Kernel TREES -->
+    <project name="BB-BotOS/kernel_xiaomi_ysl_mikasa" path="device/kernel/ysl" remote="github" />
+    
+    <!-- DEVICE TREES -->
+    <project name="BB-BotOS/device_xiaomi_msm8953-common" path="device/xiaomi/ysl" remote="github" />
+    
+    <!-- VENDOR TREES -->
+    <project name="BB-BotOS/proprietary_vendor_xiaomi_ysl" path="device/vendor/ysl" remote="github" />
+    
+    
+    <!-- /e/ vendor repo -->
+    <project name="steadfasterX/android_vendor_e" path="vendor/e" remote="e" />
+    
